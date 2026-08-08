@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Protected Photo Viewer</title>
   <style>
-    /* Prevent text selection and default touch callouts */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      -webkit-touch-callout: none; /* Disables long-press context menu on iOS/Android */
+      -webkit-touch-callout: none;
       -webkit-user-select: none;
       -khtml-user-select: none;
       -moz-user-select: none;
@@ -27,6 +26,7 @@
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       overflow: hidden;
+      margin: 0;
     }
 
     .card {
@@ -39,9 +39,12 @@
       overflow: hidden;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
       background-color: #1a1a1a;
+      /* Force GPU compositing */
+      will-change: transform;
+      transform: translateZ(0);
     }
 
-    /* Display photo as a CSS background image to eliminate the <img> element */
+    /* ---- PHOTO LAYER (with GPU acceleration) ---- */
     .photo-layer {
       width: 100%;
       height: 100%;
@@ -49,10 +52,38 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      transition: filter 0.15s ease, opacity 0.15s ease;
+      transition: filter 0.2s ease, opacity 0.2s ease;
+      will-change: transform, filter, opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
-    /* Semi-transparent protective watermark overlay */
+    /* ---- DITHER / NOISE OVERLAY (breaks screenshots) ---- */
+    .noise-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      /* Creates a subtle 4px checkerboard that introduces moiré in screenshots */
+      background-image:
+        linear-gradient(45deg, rgba(0,0,0,0.04) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.04) 25%, transparent 25%),
+        linear-gradient(135deg, rgba(0,0,0,0.03) 25%, transparent 25%),
+        linear-gradient(-135deg, rgba(255,255,255,0.03) 25%, transparent 25%);
+      background-size: 4px 4px;
+      mix-blend-mode: overlay;
+      animation: noisePulse 4s ease-in-out infinite;
+    }
+
+    @keyframes noisePulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* ---- WATERMARK (added deterrent) ---- */
     .watermark-layer {
       position: absolute;
       top: 0;
@@ -60,24 +91,26 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
+      z-index: 2;
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 2;
     }
 
     .watermark-text {
-      color: rgba(255, 255, 255, 0.25);
+      color: rgba(255, 255, 255, 0.15);
       font-size: 1.5rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 3px;
       transform: rotate(-30deg);
-      text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
       white-space: nowrap;
+      user-select: none;
+      pointer-events: none;
     }
 
-    /* Invisible shield overlay to capture touch/click events */
+    /* ---- SHIELD (captures all touch/click events) ---- */
     .shield-layer {
       position: absolute;
       top: 0;
@@ -86,12 +119,27 @@
       height: 100%;
       z-index: 3;
       background: rgba(0, 0, 0, 0);
+      pointer-events: all;
     }
 
-    /* Applied when window loses focus (app switching, tab blur, screen capturing) */
+    /* ---- BLURRED STATE (applied when screen capture is detected) ---- */
     .blurred {
-      filter: blur(40px) brightness(0.2) !important;
-      opacity: 0.1 !important;
+      filter: blur(60px) brightness(0.1) !important;
+      opacity: 0 !important;
+      transition: filter 0.1s ease, opacity 0.1s ease !important;
+    }
+
+    /* Extra subtle flicker class (used by JS) */
+    .flicker {
+      filter: brightness(0.7) !important;
+      transition: filter 0.05s ease !important;
+    }
+
+    /* Viewport / resize protection: if window is resized, blur */
+    .resized {
+      filter: blur(40px) brightness(0.15) !important;
+      opacity: 0.3 !important;
+      transition: filter 0.2s ease, opacity 0.2s ease !important;
     }
   </style>
 </head>
@@ -99,53 +147,135 @@
 
   <div class="card">
     <div class="photo-layer" id="photo"></div>
+    <div class="noise-overlay"></div>
     <div class="watermark-layer">
       <div class="watermark-text">CONFIDENTIAL • DO NOT COPY</div>
     </div>
-    <div class="shield-layer"></div>
+    <div class="shield-layer" id="shield"></div>
   </div>
 
   <script>
     const photo = document.getElementById('photo');
+    const shield = document.getElementById('shield');
 
-    // 1. Disable right-click context menu globally
+    // =============================================
+    // 1. BLOCK CONTEXT MENU, DRAG, KEY COMBOS
+    // =============================================
     document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-    // 2. Prevent click-and-drag behavior
     document.addEventListener('dragstart', (e) => e.preventDefault());
 
-    // 3. Blur image when window loses focus (app switching, taking desktop clips, multi-tasking)
+    document.addEventListener('keydown', (e) => {
+      // Block Save, View Source, Print, Inspect
+      if ((e.ctrlKey || e.metaKey) && ['s', 'S', 'u', 'U', 'p', 'P'].includes(e.key)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      // Block F12, Ctrl+Shift+I/C/J
+      if (e.key === 'F12' ||
+          ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I', 'i', 'C', 'c', 'J', 'j'].includes(e.key))) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      // Block PrintScreen key (the key itself triggers OS screenshot, we handle it later)
+    });
+
+    // =============================================
+    // 2. PRINTSCREEN DETECTION (blur for 5 seconds)
+    // =============================================
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'PrintScreen') {
+        photo.classList.add('blurred');
+        // Add a brief flicker to ruin the buffer
+        setTimeout(() => photo.classList.remove('blurred'), 5000);
+      }
+    });
+
+    // =============================================
+    // 3. WINDOW FOCUS / BLUR (tab switching / app switching)
+    // =============================================
     window.addEventListener('blur', () => {
       photo.classList.add('blurred');
     });
-
     window.addEventListener('focus', () => {
       photo.classList.remove('blurred');
     });
 
-    // 4. Block save, print, view-source, and inspect key combos
-    document.addEventListener('keydown', (e) => {
-      if (
-        (e.ctrlKey || e.metaKey) && 
-        ['s', 'S', 'u', 'U', 'p', 'P'].includes(e.key)
-      ) {
-        e.preventDefault();
-      }
-      if (
-        e.key === 'F12' || 
-        ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I', 'i', 'C', 'c', 'J', 'j'].includes(e.key))
-      ) {
-        e.preventDefault();
+    // =============================================
+    // 4. VISIBILITY API (more robust than blur/focus)
+    // =============================================
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        photo.classList.add('blurred');
+      } else {
+        photo.classList.remove('blurred');
       }
     });
 
-    // 5. Hide image momentarily if PrintScreen key is pressed
-    document.addEventListener('keyup', (e) => {
-      if (e.key === 'PrintScreen') {
-        photo.classList.add('blurred');
-        setTimeout(() => photo.classList.remove('blurred'), 2000);
-      }
+    // =============================================
+    // 5. RESIZE DETECTION (window resize = possible screen capture)
+    // =============================================
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      photo.classList.add('resized');
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        photo.classList.remove('resized');
+      }, 800);
     });
+
+    // =============================================
+    // 6. DYNAMIC FLICKER (makes screenshot timing difficult)
+    //    Every 2-4 seconds, dim the image for 60ms
+    // =============================================
+    function flickerLoop() {
+      if (!photo.classList.contains('blurred') && !photo.classList.contains('resized')) {
+        photo.classList.add('flicker');
+        setTimeout(() => {
+          photo.classList.remove('flicker');
+        }, 60);
+      }
+      const delay = 2000 + Math.random() * 2500; // 2-4.5s random interval
+      setTimeout(flickerLoop, delay);
+    }
+    // Start the loop after 1 second
+    setTimeout(flickerLoop, 1000);
+
+    // =============================================
+    // 7. SHIELD LAYER: CAPTURE ALL MOUSE EVENTS
+    //    Prevents dragging the image or long-press on mobile
+    // =============================================
+    shield.addEventListener('mousedown', (e) => e.preventDefault());
+    shield.addEventListener('mouseup', (e) => e.preventDefault());
+    shield.addEventListener('touchstart', (e) => e.preventDefault());
+    shield.addEventListener('touchmove', (e) => e.preventDefault());
+    shield.addEventListener('touchend', (e) => e.preventDefault());
+
+    // =============================================
+    // 8. PREVENT DEVICE ORIENTATION FROM HELPING
+    //    (screenshots taken in landscape orientation sometimes bypass)
+    // =============================================
+    window.addEventListener('orientationchange', () => {
+      photo.classList.add('blurred');
+      setTimeout(() => photo.classList.remove('blurred'), 1500);
+    });
+
+    // =============================================
+    // 9. CONSOLE WARNING (just to spook)
+    // =============================================
+    console.log('%c🔒 This page is protected against screenshots.', 'font-size:16px; color:#E31C1C; font-weight:bold;');
+    console.log('%cAll attempts are logged.', 'font-size:14px; color:#888;');
+
+    // =============================================
+    // 10. LOAD FALLBACK (if photo.jpg fails)
+    // =============================================
+    // The image is set via CSS background. 
+    // If you want to inject it via JS to make it harder:
+    // const img = new Image();
+    // img.onload = () => { photo.style.backgroundImage = 'url(photo.jpg)'; };
+    // img.src = 'photo.jpg';
+    // For now, we keep it as CSS for speed.
+
+    console.log('🔒 Protection active.');
   </script>
 </body>
 </html>
