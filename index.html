@@ -3,18 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ozzy — Yu'ki MMA</title>
-<meta name="description" content="Ozzy — MMA fighter with Yu'ki MMA. Wrestler turned grappler, guillotine specialist.">
+<title>Ozzy — Yu'ki MMA | Wrestler & Grappler Profile</title>
+
+<!-- Core SEO Meta Tags -->
+<meta name="description" content="Ozzy — 15-year-old MMA fighter with Yu'ki MMA. Wrestler turned grappler specializing in guillotine chokes, ground control, and complete combat sports.">
+<meta name="keywords" content="Ozzy, Yuki MMA, Yu'ki MMA, MMA fighter, guillotine choke, grappler, wrestler, combat sports">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://ozzyaboutme.vercel.app/">
+
 <meta name="theme-color" content="#0A0A0B">
+
+<!-- Favicon Links (Linked to crest.jpg in root) -->
+<link rel="icon" type="image/jpeg" href="/crest.jpg">
+<link rel="apple-touch-icon" href="/crest.jpg">
+
+<!-- Open Graph / Facebook / Discord Visual Link Previews -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Ozzy — Yu'ki MMA">
-<meta property="og:description" content="MMA fighter with Yu'ki MMA. Guillotine specialist.">
-<meta property="og:image" content="crest.jpg">
-<meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A0A0B'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23E31C1C' stroke-width='3'/%3E%3C/svg%3E">
+<meta property="og:url" content="https://ozzyaboutme.vercel.app/">
+<meta property="og:title" content="Ozzy — Yu'ki MMA Fighter Profile">
+<meta property="og:description" content="Ozzy — MMA fighter with Yu'ki MMA. Wrestler turned grappler and guillotine choke specialist.">
+<meta property="og:image" content="https://ozzyaboutme.vercel.app/crest.jpg">
+
+<!-- Twitter / X Card Previews -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://ozzyaboutme.vercel.app/">
+<meta name="twitter:title" content="Ozzy — Yu'ki MMA Fighter Profile">
+<meta name="twitter:description" content="MMA fighter with Yu'ki MMA. Wrestler turned grappler and guillotine choke specialist.">
+<meta name="twitter:image" content="https://ozzyaboutme.vercel.app/crest.jpg">
+
+<!-- Structured Data (JSON-LD) for Google Rich Snippets -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ozzy",
+  "url": "https://ozzyaboutme.vercel.app/",
+  "image": "https://ozzyaboutme.vercel.app/crest.jpg",
+  "jobTitle": "MMA Fighter",
+  "memberOf": {
+    "@type": "SportsTeam",
+    "name": "Yu'ki MMA"
+  },
+  "sameAs": [
+    "https://www.instagram.com/ozzycoutsmma",
+    "https://youtube.com/@ozzycoutsmma",
+    "https://www.snapchat.com/add/mrtakeyabit999"
+  ],
+  "description": "MMA fighter with Yu'ki MMA, wrestler, and grappler specializing in guillotine chokes."
+}
+</script>
+
+<!-- Fonts & Preconnects -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --mat:#0A0A0B;
@@ -25,7 +68,7 @@
     --line:rgba(246,245,242,.10);
     --accent:#E31C1C;
     --accent-soft:rgba(227,28,28,.14);
-    --accent-text:#FF3B3B; /* brighter than --accent for small text on --mat — passes WCAG AA (5.6:1 vs 4.19:1) */
+    --accent-text:#FF3B3B;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -154,61 +197,39 @@
   .playbtn svg{width:30px;height:30px;margin-left:4px}
   .cover-tag{position:absolute;left:0;right:0;bottom:16px;z-index:2;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#fff}
 
-  .games{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .game{position:relative;background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:26px 22px;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .3s ease,transform .3s ease,background .3s ease}
-  .game:hover{border-color:rgba(227,28,28,.5);transform:translateY(-4px);background:var(--raised-2)}
-  .game .gi{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.16em;color:var(--steel)}
-  .game .gn{font-family:'Anton',sans-serif;font-size:1.35rem;text-transform:uppercase;line-height:1.02}
-  .game:hover .gi{color:var(--accent)}
-
-  .platform{display:flex;align-items:center;gap:12px;margin-top:26px;justify-content:center}
-  .platform .pill{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--chalk);border:1px solid var(--line);border-radius:999px;padding:9px 18px}
-
-  .ach{display:flex;align-items:center;gap:20px;margin-top:30px;background:var(--raised-2);border:1px solid var(--line);border-radius:14px;padding:20px 26px}
-  .ach .badge{width:52px;height:52px;border-radius:50%;flex:none;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px rgba(227,28,28,.45)}
-  .ach .badge svg{width:24px;height:24px}
-  .ach .txt{display:flex;flex-direction:column;gap:4px}
-  .ach .txt .lab{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.22em;color:var(--steel);text-transform:uppercase}
-  .ach .txt .game-c{font-family:'Anton',sans-serif;font-size:1.5rem;text-transform:uppercase;line-height:1}
-
-  /* ---------- FUEL ---------- */
-  .fuel-card{margin-top:14px;border:1px solid var(--line);border-radius:18px;padding:48px 44px;background:radial-gradient(circle at 88% 12%, rgba(227,28,28,.14), rgba(20,20,23,0) 42%), var(--raised)}
-  .fuel-card .lede{margin-top:16px}
-
-  /* ---------- FOOTER ---------- */
+  /* ---------- FOOTER & SOCIALS ---------- */
   .foot{border-top:1px solid var(--line);padding:46px 0 58px;text-align:center}
   .foot .sig{font-family:'Anton',sans-serif;font-size:2rem;text-transform:uppercase;letter-spacing:.02em}
   .foot .sub{margin-top:10px}
   .foot .dot{color:var(--accent)}
-  .socials{display:flex;justify-content:center;margin-top:24px}
+
+  .socials{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
   .social{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.12em;color:var(--chalk);border:1px solid var(--line);border-radius:999px;padding:11px 20px;transition:border-color .25s ease,color .25s ease,background .25s ease}
   .social:hover{border-color:rgba(227,28,28,.6);color:var(--accent);background:var(--accent-soft)}
-  .social svg{width:18px;height:18px}
+  .social svg{width:18px;height:18px;fill:currentColor}
 
-  /* ---------- reveal ---------- */
+  /* ---------- REVEAL ---------- */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
   .pre{opacity:0;transform:translateY(20px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
   .d1{animation-delay:.05s}.d2{animation-delay:.2s}.d3{animation-delay:.38s}.d4{animation-delay:.55s}
   @keyframes rise{to{opacity:1;transform:none}}
 
-  /* ---------- responsive ---------- */
+  /* ---------- RESPONSIVE ---------- */
   @media(max-width:760px){
     .section{padding:78px 0}
     .move-grid{grid-template-columns:1fr}
-    .games{grid-template-columns:1fr 1fr}
     .gym-row{grid-template-columns:1fr;gap:26px}
     .tape .cell{flex:1 1 40%;min-width:40%}
-    .fuel-card{padding:34px 26px}
     .hero{padding:64px 0 50px}
     .np-head{flex-wrap:wrap;gap:14px}
     .lyrics{order:3}
   }
   @media(max-width:430px){
-    .games{grid-template-columns:1fr}
     .tape .cell{flex:1 1 100%;min-width:100%;border-right:none;border-bottom:1px solid var(--line)}
     .tape .cell:last-child{border-bottom:none}
     .np-meta{margin-right:0}
+    .socials{flex-direction:column;align-items:center}
   }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
@@ -232,7 +253,7 @@
     <div class="mat-glow"></div>
     <div class="mat"><div class="ring"></div><div class="ring inner"></div><div class="center"></div></div>
     <div class="wrap hero-inner">
-      <img class="crest pre" src="crest.jpg" alt="Yu'ki MMA dragon crest" width="480" height="467">
+      <img class="crest pre" src="/crest.jpg" alt="Yu'ki MMA crest" width="480" height="467">
       <div class="eyebrow hero-eyebrow pre d1"><span class="dash"></span><span class="mono">MMA Fighter — Yu'ki MMA</span><span class="dash"></span></div>
       <h1 class="name pre d2">Ozzy</h1>
       <p class="tagline pre d3">Finish what you start.</p>
@@ -311,74 +332,17 @@
         </div>
       </div>
 
-      <p class="np-hint reveal">No sound? <a href="https://www.youtube.com/watch?v=Nkrgb7qIko0" target="_blank" rel="noopener">Open it on YouTube ↗</a></p>
-
-      <div class="games">
-        <div class="game reveal"><span class="gi">G01</span><span class="gn">Fortnite</span></div>
-        <div class="game reveal"><span class="gi">G02</span><span class="gn">Rainbow Six Siege</span></div>
-        <div class="game reveal"><span class="gi">G03</span><span class="gn">Black Ops 1</span></div>
-        <div class="game reveal"><span class="gi">G04</span><span class="gn">GTA 5 Online</span></div>
-        <div class="game reveal"><span class="gi">G05</span><span class="gn">Content Warning</span></div>
-        <div class="game reveal" style="justify-content:center;align-items:center;text-align:center;border-style:dashed"><span class="gn" style="font-size:1.05rem;color:var(--steel)">+ whatever's next</span></div>
-      </div>
-
-      <div class="ach reveal">
-        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#0A0A0B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-        <div class="txt"><span class="lab">Achievement Unlocked</span><span class="game-c">Cleared — Escape the Backrooms</span></div>
-      </div>
-
-      <div class="platform reveal"><span class="pill">Xbox Series S</span></div>
+      <p class="np-hint reveal">No sound? <a href="https://www.youtube.com/watch?v=Nkrgb7qIko0" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
     </div>
   </section>
-
-  <!-- FUEL -->
-  <section class="section">
-    <div class="wrap">
-      <div class="fuel-card reveal">
-        <div class="eyebrow"><span class="dash"></span><span class="mono">Fuel</span></div>
-        <h2 class="section-title">Strawberry-banana<br>pancakes. Homemade.</h2>
-        <p class="lede">Tries to eat clean — most of the time. The pancakes stay on the menu either way. Some things you don't cut.</p>
-      </div>
-    </div>
-  </section>
-
   </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER & SOCIAL LINKS -->
   <footer class="foot">
     <div class="wrap">
-      <div class="sig">OZZY</div>
-      <p class="sub mono">Yu'ki MMA <span class="dot">●</span> Run it back</p>
-      <div class="socials">
-        <a class="social" href="https://www.instagram.com/mrtakeyadown999?igsh=czVwYjJjYmpzamF1" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg>
-          @mrtakeyadown999
-        </a>
-      </div>
-    </div>
-  </footer>
+      <div class="sig">Ozzy<span class="dot">.</span></div>
+      <p class="sub mono">Yu'ki MMA · Finish What You Start</p>
 
-  <script>
-    // scroll reveals
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-    },{threshold:0.14, rootMargin:'0px 0px -40px 0px'});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-    // music player: tap to play (user gesture = audio allowed, incl. mobile)
-    const btn = document.getElementById('coverBtn');
-    btn.addEventListener('click', ()=>{
-      const player = document.getElementById('player');
-      const np = document.getElementById('np');
-      const f = document.createElement('iframe');
-      f.src = "https://www.youtube.com/embed/Nkrgb7qIko0?autoplay=1&playsinline=1&rel=0&modestbranding=1";
-      f.title = "DND — Polo G";
-      f.allow = "autoplay; encrypted-media; picture-in-picture; web-share";
-      f.setAttribute('allowfullscreen','');
-      player.innerHTML = '';
-      player.appendChild(f);
-      np.classList.add('playing');
-    });
-  </script>
-</body>
-</html>
+      <div class="socials reveal">
+        <a class="social" href="https://www.instagram.com/ozzycoutsmma?stkn=czVwYjJjYmpzamF1" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2
