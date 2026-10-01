@@ -13,25 +13,25 @@
 
 <meta name="theme-color" content="#0A0A0B">
 
-<!-- Favicon Links (Linked to crest.jpg in root) -->
+<!-- Favicon Links -->
 <link rel="icon" type="image/jpeg" href="/crest.jpg">
 <link rel="apple-touch-icon" href="/crest.jpg">
 
-<!-- Open Graph / Facebook / Discord Visual Link Previews -->
+<!-- Open Graph / Social Previews -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ozzyaboutme.vercel.app/">
 <meta property="og:title" content="Ozzy — Yu'ki MMA Fighter Profile">
 <meta property="og:description" content="Ozzy — MMA fighter with Yu'ki MMA. Wrestler turned grappler and guillotine choke specialist.">
 <meta property="og:image" content="https://ozzyaboutme.vercel.app/crest.jpg">
 
-<!-- Twitter / X Card Previews -->
+<!-- Twitter Card Previews -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://ozzyaboutme.vercel.app/">
 <meta name="twitter:title" content="Ozzy — Yu'ki MMA Fighter Profile">
 <meta name="twitter:description" content="MMA fighter with Yu'ki MMA. Wrestler turned grappler and guillotine choke specialist.">
 <meta name="twitter:image" content="https://ozzyaboutme.vercel.app/crest.jpg">
 
-<!-- Structured Data (JSON-LD) for Google Rich Snippets -->
+<!-- Structured Data (JSON-LD) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,7 +53,7 @@
 }
 </script>
 
-<!-- Fonts & Preconnects -->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -107,7 +107,7 @@
   }
   .lede{max-width:46ch;margin-top:18px;font-size:1.06rem;color:#D3D2CD}
 
-  /* ---------- TOP BAR ---------- */
+  /* TOP BAR */
   .topbar{border-bottom:1px solid var(--line);position:relative;z-index:5}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 28px}
   .topbar .brand{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}
@@ -115,7 +115,7 @@
   .topbar .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(227,28,28,.6);animation:pulse 2.4s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(227,28,28,.55)}70%{box-shadow:0 0 0 7px rgba(227,28,28,0)}100%{box-shadow:0 0 0 0 rgba(227,28,28,0)}}
 
-  /* ---------- HERO ---------- */
+  /* HERO */
   .hero{position:relative;padding:96px 0 70px;text-align:center;overflow:hidden}
   .mat{position:absolute;top:50%;left:50%;width:min(120vw,860px);height:min(120vw,860px);transform:translate(-50%,-54%);pointer-events:none;z-index:0}
   .mat .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(246,245,242,.07)}
@@ -140,13 +140,13 @@
   .tape .v{font-family:'Anton',sans-serif;font-size:1.7rem;text-transform:uppercase;line-height:1}
   .swatch{width:26px;height:26px;background:#000;border:1px solid var(--chalk);border-radius:5px}
 
-  /* ---------- BANNER ---------- */
+  /* BANNER */
   .banner{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:radial-gradient(circle at 50% 50%, rgba(227,28,28,.08), rgba(20,20,23,0) 70%);text-align:center;padding:64px 28px}
   .banner .be{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-text);margin-bottom:18px}
   .banner .bt{font-family:'Anton',sans-serif;text-transform:uppercase;line-height:.98;font-size:clamp(1.9rem,5.2vw,3.3rem);max-width:20ch;margin:0 auto}
   .banner .bs{margin-top:16px;color:#D3D2CD;font-size:1rem}
 
-  /* ---------- THE GO-TO ---------- */
+  /* THE GO-TO */
   .move-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px}
   .step{position:relative;background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:28px 24px 26px;overflow:hidden;transition:border-color .3s ease, transform .3s ease, background .3s ease}
   .step:hover{border-color:rgba(227,28,28,.55);transform:translateY(-4px);background:var(--raised-2)}
@@ -156,7 +156,7 @@
   .step.fake:hover .label{animation:juke .55s ease}
   @keyframes juke{0%{transform:translateX(0)}28%{transform:translateX(-16px)}52%{transform:translateX(-16px)}100%{transform:translateX(0)}}
 
-  /* ---------- IN THE GYM ---------- */
+  /* GYM & FIGHTERS */
   .gym-row{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;margin-top:14px}
   .spots{display:flex;flex-direction:column;gap:14px}
   .spot{display:flex;align-items:center;justify-content:space-between;background:var(--raised);border:1px solid var(--line);border-radius:12px;padding:20px 24px;transition:border-color .3s ease,transform .3s ease}
@@ -164,7 +164,14 @@
   .spot .name-s{font-family:'Anton',sans-serif;font-size:1.45rem;text-transform:uppercase}
   .spot .tag{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.18em;color:var(--steel);text-transform:uppercase}
 
-  /* ---------- ON ROTATION / PLAYER ---------- */
+  .fighter-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
+  .fighter-card{background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:24px;transition:border-color .3s ease, transform .3s ease}
+  .fighter-card:hover{border-color:rgba(227,28,28,.45);transform:translateY(-3px)}
+  .fighter-card .f-name{font-family:'Anton',sans-serif;font-size:1.5rem;text-transform:uppercase;color:var(--chalk)}
+  .fighter-card .f-style{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.18em;color:var(--accent-text);text-transform:uppercase;margin-top:4px}
+  .fighter-card .f-desc{margin-top:10px;font-size:.9rem;color:var(--steel)}
+
+  /* MEDIA & PLAYER */
   .crest{display:block;width:clamp(116px,17vw,158px);height:auto;aspect-ratio:1/1;object-fit:cover;margin:0 auto 26px;filter:drop-shadow(0 8px 26px rgba(0,0,0,.55));border-radius:50%}
   .nowplaying{margin-top:14px;margin-bottom:14px;border:1px solid rgba(227,28,28,.28);border-radius:18px;overflow:hidden;background:linear-gradient(120deg, var(--accent-soft), rgba(20,20,23,0) 62%), var(--raised)}
   .np-hint{margin:0 auto 42px;text-align:center;font-size:.86rem;color:var(--steel)}
@@ -197,7 +204,7 @@
   .playbtn svg{width:30px;height:30px;margin-left:4px}
   .cover-tag{position:absolute;left:0;right:0;bottom:16px;z-index:2;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#fff}
 
-  /* ---------- FOOTER & SOCIALS ---------- */
+  /* FOOTER & SOCIALS */
   .foot{border-top:1px solid var(--line);padding:46px 0 58px;text-align:center}
   .foot .sig{font-family:'Anton',sans-serif;font-size:2rem;text-transform:uppercase;letter-spacing:.02em}
   .foot .sub{margin-top:10px}
@@ -208,17 +215,18 @@
   .social:hover{border-color:rgba(227,28,28,.6);color:var(--accent);background:var(--accent-soft)}
   .social svg{width:18px;height:18px;fill:currentColor}
 
-  /* ---------- REVEAL ---------- */
+  /* REVEAL */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
   .pre{opacity:0;transform:translateY(20px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
   .d1{animation-delay:.05s}.d2{animation-delay:.2s}.d3{animation-delay:.38s}.d4{animation-delay:.55s}
   @keyframes rise{to{opacity:1;transform:none}}
 
-  /* ---------- RESPONSIVE ---------- */
+  /* RESPONSIVE */
   @media(max-width:760px){
     .section{padding:78px 0}
     .move-grid{grid-template-columns:1fr}
+    .fighter-grid{grid-template-columns:1fr}
     .gym-row{grid-template-columns:1fr;gap:26px}
     .tape .cell{flex:1 1 40%;min-width:40%}
     .hero{padding:64px 0 50px}
@@ -230,11 +238,6 @@
     .tape .cell:last-child{border-bottom:none}
     .np-meta{margin-right:0}
     .socials{flex-direction:column;align-items:center}
-  }
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-    .reveal{opacity:1;transform:none}
-    .pre{opacity:1;transform:none}
   }
 </style>
 </head>
@@ -268,7 +271,7 @@
   </header>
 
   <main>
-  <!-- COMBAT SPORT -->
+  <!-- BANNER -->
   <section class="banner reveal">
     <p class="be">Striking. Grappling. Everything.</p>
     <p class="bt">MMA is the most complete combat sport there is.</p>
@@ -289,24 +292,57 @@
     </div>
   </section>
 
-  <!-- IN THE GYM -->
+  <!-- IN THE GYM & WORKOUTS -->
   <section class="section">
     <div class="wrap">
       <div class="gym-row">
         <div>
           <div class="eyebrow reveal"><span class="dash"></span><span class="mono">The Grind</span></div>
           <h2 class="section-title reveal">Leg day's<br>the one.</h2>
-          <p class="lede reveal">The gym builds the engine, the cage is where it gets tested. Leg day's the favorite — just not every single day.</p>
+          <p class="lede reveal">Building raw power, conditioning for 3-round intensity, and keeping bodyweight sharp for maximum speed and endurance on the mats.</p>
         </div>
         <div class="spots">
-          <div class="spot reveal"><span class="name-s">Gym</span><span class="tag">Get Strong</span></div>
+          <div class="spot reveal"><span class="name-s">Squats & Deads</span><span class="tag">Leg Power</span></div>
+          <div class="spot reveal"><span class="name-s">Core & Grip</span><span class="tag">Mat Strength</span></div>
           <div class="spot reveal"><span class="name-s">The Cage</span><span class="tag">Where It's Won</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ON ROTATION -->
+  <!-- INSPIRATION & FIGHTERS STUDIED -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal"><span class="dash"></span><span class="mono">Fight Study</span></div>
+      <h2 class="section-title reveal">Influences &<br>Technique.</h2>
+      <p class="lede reveal">Studying the game's best to build a dangerous style on the feet and on the canvas.</p>
+      
+      <div class="fighter-grid">
+        <div class="fighter-card reveal">
+          <div class="f-name">Charles Oliveira</div>
+          <div class="f-style">Submission Specialist</div>
+          <div class="f-desc">Lethal front chokes, guard dangerous at all times, relentless pressure.</div>
+        </div>
+        <div class="fighter-card reveal">
+          <div class="f-name">Khabib Nurmagomedov</div>
+          <div class="f-style">Ground Pressure</div>
+          <div class="f-desc">Unmatched wrist control, chain wrestling, heavy top pressure.</div>
+        </div>
+        <div class="fighter-card reveal">
+          <div class="f-name">Jon Jones</div>
+          <div class="f-style">Fight IQ & Distance</div>
+          <div class="f-desc">Creative striking setups, distance management, complete control.</div>
+        </div>
+        <div class="fighter-card reveal">
+          <div class="f-name">Roy Jones Jr.</div>
+          <div class="f-style">Speed & Angles</div>
+          <div class="f-desc">Lightning hand speed, unorthodox rhythm, explosive angles.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUSIC & ROTATION -->
   <section class="section">
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dash"></span><span class="mono">On Rotation</span></div>
@@ -345,4 +381,46 @@
 
       <div class="socials reveal">
         <a class="social" href="https://www.instagram.com/ozzycoutsmma?stkn=czVwYjJjYmpzamF1" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 2
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram</span>
+        </a>
+
+        <a class="social" href="https://youtube.com/@ozzycoutsmma?si=C2dFGxoRhEGMKUaW" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span>YouTube</span>
+        </a>
+
+        <a class="social" href="https://www.snapchat.com/add/mrtakeyabit999?share_id=0RpRtQKXbN8&locale=en-US" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12.039 0c-3.921 0-6.19 2.828-6.19 5.811 0 1.447.531 2.518.995 3.447.168.337.289.658.118 1.011-.242.496-1.127.818-1.954.818-.344 0-.649-.053-.941-.151-.274-.093-.51-.151-.703-.151-.433 0-.766.274-.766.726 0 .531.579 1.157 1.583 1.536 1.42.536 1.831.957 1.831 1.409 0 .423-.393.929-1.259.929-.265 0-.547-.042-.838-.124-.582-.164-.994-.258-1.391-.258-.69 0-1.12.383-1.12 1.021 0 1.036 1.636 2.063 4.254 2.063 1.074 0 1.892-.187 2.441-.497.41-.232.747-.361.996-.361.189 0 .34.072.484.228.455.492 1.258 1.109 2.46 1.109 1.202 0 2.005-.617 2.46-1.109.144-.156.295-.228.484-.228.249 0 .586.129.996.361.549.31 1.367.497 2.441.497 2.618 0 4.254-1.027 4.254-2.063 0-.638-.43-1.021-1.12-1.021-.397 0-.809.094-1.391.258-.291.082-.573.124-.838.124-.866 0-1.259-.506-1.259-.929 0-.452.411-.873 1.831-1.409 1.004-.379 1.583-1.005 1.583-1.536 0-.452-.333-.726-.766-.726-.193 0-.429.058-.703.151-.292.098-.597.151-.941.151-.827 0-1.712-.322-1.954-.818-.171-.353-.05-.674.118-1.011.464-.929.995-2 0.995-3.447 0-2.983-2.269-5.811-6.19-5.811z"/></svg>
+          <span>Snapchat</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Dynamic Video Player
+    const coverBtn = document.getElementById('coverBtn');
+    const playerContainer = document.getElementById('player');
+    const npBox = document.getElementById('np');
+
+    if (coverBtn) {
+      coverBtn.addEventListener('click', () => {
+        playerContainer.innerHTML = '<iframe src="https://www.youtube.com/embed/Nkrgb7qIko0?autoplay=1&rel=0" title="Polo G - DND" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        npBox.classList.add('playing');
+      });
+    }
+  </script>
+</body>
+</html>
